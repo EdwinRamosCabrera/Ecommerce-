@@ -1,0 +1,45 @@
+@model Contact
+@{
+    ViewData["Title"] = "Contáctanos";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h1 class="text-center">@ViewData["Title"]</h1>
+
+            <form method="post" asp-action="ContactCreate">
+                <div class="form-group">
+                    <label asp-for="ContactName">Nombres:</label>
+                    <input asp-for="ContactName" class="form-control" autofocus />
+                    <span asp-validation-for="ContactName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContactLastName">Apellidos:</label>
+                    <input asp-for="ContactLastName" class="form-control" />
+                    <span asp-validation-for="ContactLastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContactEmail">Correo:</label>
+                    <input asp-for="ContactEmail" class="form-control" placeholder="ejemplo@ejemplo.com" />
+                    <span asp-validation-for="ContactEmail" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContactPhone">Telefono:</label>
+                    <input asp-for="ContactPhone" class="form-control" placeholder="51 999999999" maxlength="12" />
+                    <span asp-validation-for="ContactPhone" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContactMessage">Mensaje:</label>
+                    <textarea asp-for="ContactMessage" class="form-control"></textarea>
+                    <span asp-validation-for="ContactMessage" class="text-danger"></span>
+                </div>
+                <br>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-6">
+        </div>
+    </div>
+</div>
