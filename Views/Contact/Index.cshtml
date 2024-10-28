@@ -1,0 +1,51 @@
+@model IEnumerable<Contact>
+@{
+    ViewData["Title"] = "Mensajes de los Contactos";
+}
+
+<div class="Container text-center">
+    <h1>@ViewData["Title"]</h1>
+    @if(!Model.Any() || Model == null){
+        <div class="alert alert-warning">
+            <p>No hay mensajes de contáctanos aún</p>
+        </div>
+    }
+    else{
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Correo</th>
+                    <th>Teléfono</th>
+                    <th>Mensaje</th>
+                    <th>Fecha</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model){
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.ContactId)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ContactName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ContactLastName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ContactEmail)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ContactPhone)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ContactMessage)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ContactDate)</td>
+                        <td>
+                            <a asp-controller="Contact" asp-action="ContactEdit" asp-route-id="@item.ContactId" class="btn btn-success">Editar</a> 
+                        </td>
+                        <td>
+                            <a asp-controller="Contact" asp-action="ContactDelete" asp-route-id="@item.ContactId" class="btn btn-danger">Eliminar</a> 
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+    }
+</div>
