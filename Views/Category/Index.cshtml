@@ -1,0 +1,56 @@
+@model IEnumerable<Category>
+
+@{
+    ViewData["Title"] = "Lista de Categorias";
+}
+
+<h1>@ViewData["Title"]</h1>
+<div class="container">
+
+    <div style="margin: 0 0 10px 0;">
+        <a asp-action="CategoryCreate" class="btn btn-primary">Crear Categoria</a>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            @if(!Model.Any())
+            {
+                <div class="alert alert-warning">
+                    <p>No se encuentra ingresadas categorias</p>
+                </div>
+            }
+            else 
+            {
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var item in Model){
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.CategoryId)</td>
+                                <td>@Html.DisplayFor(modelItem => item.CategoryCode)</td>
+                                <td>@Html.DisplayFor(modelItem => item.CategoryName)</td>
+                                <td>
+                                    <a asp-controller="Category" asp-action="CategoryEdit" asp-route-id="@item.CategoryId" class="btn btn-success">Editar</a> 
+                                </td>
+                                <td>
+                                    <a asp-controller="Category" asp-action="CategoryDelete" asp-route-id="@item.CategoryId" class="btn btn-danger">Eliminar</a> 
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+        <div class="col-6">
+
+        </div>
+    </div>
+</div>

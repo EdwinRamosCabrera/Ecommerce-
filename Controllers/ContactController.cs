@@ -7,7 +7,6 @@ using Ecommerce_.Data;
 using Ecommerce_.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Razor.Language;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Ecommerce_.Controllers
 {
@@ -55,7 +54,7 @@ namespace Ecommerce_.Controllers
         }
 
         [HttpPost]
-        public IActionResult ContactEdit(int id, [Bind("ContactId, ContactName, ContactLastName, ContactEmail, ContactPhone, ContactMessage")]Contact UpdateContact)
+        public IActionResult ContactEdit(int id, [Bind("ContactId, ContactName, ContactLastName, ContactEmail, ContactPhone, ContactDate, ContactMessage")]Contact UpdateContact)
         {   
             Console.WriteLine(UpdateContact.ContactDate);
             _context.Update(UpdateContact);

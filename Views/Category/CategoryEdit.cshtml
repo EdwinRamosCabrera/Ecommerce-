@@ -1,0 +1,34 @@
+@model Category
+
+@{
+    ViewData["Title"] = "Actualizar Categoria";
+}
+ 
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h1 class="text-center">@ViewData["Title"]</h1>
+            <form method="post" asp-action="CategoryEdit">
+                <input type="hidden" asp-for="CategoryId" />
+                <div class="form-group">
+                    <label asp-for="CategoryCode">Código:</label>
+                    <input asp-for="CategoryCode" class="form-control" autofocus />
+                    <span asp-validation-for="CategoryCode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CategoryName">Nombre:</label>
+                    <input asp-for="CategoryName" class="form-control" />
+                    <span asp-validation-for="CategoryName" class="text-danger"></span>
+                </div>
+                <br>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Actualizar Categoria</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-6">
+        </div>
+    </div>
+</div>
+
+

@@ -2,9 +2,10 @@
 @{
     ViewData["Title"] = "Mensajes de los Contactos";
 }
+    
+<h1>@ViewData["Title"]</h1>
 
 <div class="Container text-center">
-    <h1>@ViewData["Title"]</h1>
     @if(!Model.Any() || Model == null){
         <div class="alert alert-warning">
             <p>No hay mensajes de contáctanos aún</p>
@@ -45,7 +46,5 @@
                 }
             </tbody>
         </table>
-
-
     }
 </div>
