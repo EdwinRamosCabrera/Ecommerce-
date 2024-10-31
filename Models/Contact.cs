@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -32,14 +33,19 @@ namespace Ecommerce_.Models
         [StringLength (12, ErrorMessage = "El campo Teléfono no puede exceder los 12 caracteres")]
         [Column("Telefono")]
         public string? ContactPhone { get; set; }
-        
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-        [Column("Fecha")]
-        public DateTime ContactDate { get; set;}
 
         [Required (ErrorMessage = "El campo Mensaje es obligatorio")]
         [StringLength(300, ErrorMessage = "El campo no puede tener mas de 300 caracteres")]
         [Column("Mensaje")]
         public string ContactMessage { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy HH:mm}", ApplyFormatInEditMode = true)]
+        [Column("Fecha")]
+        public DateTimeOffset ContactDate { get; set;} 
+
+        public Contact()
+        {
+                ContactDate = DateTimeOffset.UtcNow;
+        }
     }
 }

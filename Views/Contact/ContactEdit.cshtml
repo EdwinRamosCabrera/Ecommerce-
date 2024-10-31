@@ -4,16 +4,15 @@
 }
 <div class="container">
     <div class="row">
-        <div class="col-6">
+        < class="col-6">
             <h1 class="text-center">@ViewData["Title"]</h1>
 
             <form asp-controller="Contact" asp-action="ContactEdit" method="post">
-                <div>
                     <input type="hidden" asp-for="ContactId" />
                     <input type="hidden" asp-for="ContactDate" />
-                </div>
+                
                 <div class="form-group">
-                    <label asp-for="ContactName">Nombres:</label>
+                    <label asp-for="ContactName" class="form-label">Nombres:</label>
                     <input asp-for="ContactName" class="form-control" />
                     <span asp-validation-for="ContactName" class="text-danger"></span>
                 </div>

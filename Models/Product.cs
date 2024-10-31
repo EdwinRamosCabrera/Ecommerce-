@@ -41,14 +41,19 @@ namespace Ecommerce_.Models
         public decimal ProductPrice { get; set; }
 
         [Column("Estado")]
-        public bool ProductStatus { get; set; } = false;
+        public bool ProductStatus { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy HH:mm}", ApplyFormatInEditMode = true)]
         [Column("Fecha")]
-        public DateTime ProductCreationDate { get; set; }
+        public DateTime ProductCreationDate { get; set;}
 
         [Required (ErrorMessage = "El campo Categoria es obligatorio")]
-        public int? CategoryId { get; set; }
-        public Category Category { get; set; }
+        public int CategoryId { get; set; }
+        public Category? Category { get; set; }
+
+        public Product()
+        {
+                ProductCreationDate = DateTime.UtcNow;
+        }
     }
 }

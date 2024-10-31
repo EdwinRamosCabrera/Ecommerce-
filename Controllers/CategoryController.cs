@@ -33,6 +33,18 @@ namespace Ecommerce_.Controllers
         {   
             if(!ModelState.IsValid)
             {
+                 foreach (var entry in ModelState)
+                {
+                    var fieldName = entry.Key;  // Nombre del campo que falló la validación
+                    var state = entry.Value;
+                    // Recorre todos los errores asociados a ese campo
+                    foreach (var error in state.Errors)
+                    {
+                        var errorMessage = error.ErrorMessage;  // Mensaje de error que describe qué falló
+                        Console.WriteLine($"Error en el campo {fieldName}: {errorMessage}");
+                    }
+                }
+
                 return View(category);
             }
             _context.Categorias.Add(category);

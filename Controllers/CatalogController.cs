@@ -42,29 +42,56 @@ namespace Ecommerce_.Controllers
         public ActionResult CatalogCreate(Product product)
         {   
             ViewBag.Category = _context.Categorias.Select(c => new SelectListItem(c.CategoryName, c.CategoryId.ToString()));
-            product.ProductCreationDate = DateTime.Now.ToUniversalTime();
+                       if(!ModelState.IsValid)
+            {   
+                foreach (var entry in ModelState)
+                {
+                    var fieldName = entry.Key;  // Nombre del campo que falló la validación
+                    var state = entry.Value;
+                    // Recorre todos los errores asociados a ese campo
+                    foreach (var error in state.Errors)
+                    {
+                        var errorMessage = error.ErrorMessage;  // Mensaje de error que describe qué falló
+                        Console.WriteLine($"Error en el campo {fieldName}: {errorMessage}");
+                    }
+                }
+                return View();
+            }
             _context.Productos.Add(product);
             _context.SaveChanges();
             return RedirectToAction(nameof(CatalogList));
         }
 
-        public async Task<IActionResult> CatalogEdit(int id)
+        public IActionResult CatalogEdit(int id)
         {   
             var product = _context.Productos.Find(id);
             if(product == null)
             {
                 return NotFound();
             }
-            _context.Productos.Update(product);
-            await _context.SaveChangesAsync();
+            ViewBag.Category = _context.Categorias.Select(c => new SelectListItem(c.CategoryName, c.CategoryId.ToString()));
             return View(product);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CatalogEdit(Product product)
+        public IActionResult CatalogEdit(int id, [Bind("ProductId", "ProductCode", "ProductName", "ProductImage", "ProductDescription", "ProductPrice", "ProductStatus", "CategoryId" )] Product product)
         {   
-            _context.Productos.Update(product);
-            await _context.SaveChangesAsync();
+            var productExisting = _context.Productos.Find(id);
+            if(productExisting == null)
+            {
+                return NotFound();
+            }
+            ViewBag.Category = _context.Categorias.Select(c => new SelectListItem(c.CategoryName, c.CategoryId.ToString()));
+            productExisting.ProductId = product.ProductId;
+            productExisting.ProductCode = product.ProductCode;
+            productExisting.ProductName = product.ProductName;
+            productExisting.ProductImage = product.ProductImage;
+            productExisting.ProductDescription = product.ProductDescription;
+            productExisting.ProductPrice = product.ProductPrice;
+            productExisting.ProductStatus = product.ProductStatus;
+            productExisting.CategoryId = product.CategoryId;
+
+            _context.SaveChangesAsync();
             return RedirectToAction(nameof(CatalogList));
         }
 

@@ -17,15 +17,15 @@ public class ApplicationDbContext : IdentityDbContext
 
     public DbSet<Category> Categorias { get; set;}
 
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<Product>().HasOne<Category>().WithMany()
-                                       .HasForeignKey(p => p.CategoryId)
-                                       .HasConstraintName("FK_Category_Product")
-                                       .OnDelete(DeleteBehavior.SetNull);
+        modelBuilder.Entity<Product>().HasOne(p => p.Category)
+                                      .WithMany(c => c.Products)
+                                      .HasForeignKey(p => p.CategoryId)
+                                      .HasConstraintName("FK_Category_Product")
+                                      .OnDelete(DeleteBehavior.SetNull);
         
         modelBuilder.Entity<Category>( entity => {
             entity.ToTable("Categorias");

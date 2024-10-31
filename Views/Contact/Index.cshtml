@@ -5,7 +5,7 @@
     
 <h1>@ViewData["Title"]</h1>
 
-<div class="Container text-center">
+<main class="Container text-center">
     @if(!Model.Any() || Model == null){
         <div class="alert alert-warning">
             <p>No hay mensajes de contáctanos aún</p>
@@ -35,7 +35,7 @@
                         <td>@Html.DisplayFor(modelItem => item.ContactEmail)</td>
                         <td>@Html.DisplayFor(modelItem => item.ContactPhone)</td>
                         <td>@Html.DisplayFor(modelItem => item.ContactMessage)</td>
-                        <td>@Html.DisplayFor(modelItem => item.ContactDate)</td>
+                        <td>@item.ContactDate.ToOffset(TimeSpan.FromHours(-5)).ToString("dd-MM-yyyy HH:mm")</td>
                         <td>
                             <a asp-controller="Contact" asp-action="ContactEdit" asp-route-id="@item.ContactId" class="btn btn-success">Editar</a> 
                         </td>
@@ -47,4 +47,4 @@
             </tbody>
         </table>
     }
-</div>
+</main>

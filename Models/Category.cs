@@ -23,5 +23,8 @@ namespace Ecommerce_.Models
         [Column("Nombre")]
         public string CategoryName { get; set; }
 
+        [NotMapped]
+        public ICollection<Product>? Products { get; set; }
+
     }
 }

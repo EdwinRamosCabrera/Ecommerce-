@@ -13,6 +13,7 @@ namespace Ecommerce_.Controllers
     public class ContactController : Controller
     {   
         private readonly ApplicationDbContext _context;
+
         public ContactController(ApplicationDbContext context)
         {
             _context = context;
@@ -20,7 +21,7 @@ namespace Ecommerce_.Controllers
 
         public IActionResult Index()
         {   
-            var contactos = _context.Contactos.ToList();
+            var contactos = _context.Contactos.OrderBy(c => c.ContactId).ToList();
             return View(contactos);
         }
 
@@ -36,7 +37,6 @@ namespace Ecommerce_.Controllers
                 return View(contact);
             }
             else {
-                contact.ContactDate = DateTime.Now.ToUniversalTime();
                 _context.Contactos.Add(contact);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
@@ -49,15 +49,22 @@ namespace Ecommerce_.Controllers
             if(contact == null){
                 return NotFound();
             }
-            Console.WriteLine(contact.ContactDate);
             return View(contact);
         }
 
         [HttpPost]
-        public IActionResult ContactEdit(int id, [Bind("ContactId, ContactName, ContactLastName, ContactEmail, ContactPhone, ContactDate, ContactMessage")]Contact UpdateContact)
+        public IActionResult ContactEdit(int id, [Bind("ContactId, ContactName, ContactLastName, ContactEmail, ContactPhone, ContactMessage")]Contact UpdateContact)
         {   
-            Console.WriteLine(UpdateContact.ContactDate);
-            _context.Update(UpdateContact);
+            var contactExisting = _context.Contactos.Find(id);   
+            if(contactExisting == null){
+                return NotFound();
+            }
+            contactExisting.ContactName = UpdateContact.ContactName;
+            contactExisting.ContactLastName = UpdateContact.ContactLastName;
+            contactExisting.ContactEmail = UpdateContact.ContactEmail;
+            contactExisting.ContactPhone = UpdateContact.ContactPhone;
+            contactExisting.ContactMessage = UpdateContact.ContactMessage;
+  
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }

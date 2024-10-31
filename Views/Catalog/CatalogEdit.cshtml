@@ -10,6 +10,7 @@
         <div class="col-6">
             <form method="post" asp-action="CatalogEdit">
                 <input type="hidden" asp-for="ProductId" />
+                <input type="hidden" asp-for="ProductCreationDate" />
                 <div class="form-group">
                     <label asp-for="ProductCode">Código:</label>
                     <input asp-for="ProductCode" class="form-control"/>
@@ -37,10 +38,9 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="ProductStatus">Estado:</label>
-                    <select>
-                        <option value="">--Elige una opción--</option>
-                        <option value="Activo">Activo</option>
-                        <option value="No activo">Inactivo</option>
+                    <select asp-for="ProductStatus">
+                        <option value="true">Activo</option>
+                        <option value="false">Inactivo</option>
                     </select>
                 </div>
                 <div class="form-group">

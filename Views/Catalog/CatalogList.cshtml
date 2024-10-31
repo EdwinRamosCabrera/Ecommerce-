@@ -5,64 +5,59 @@
 }
 
 <h1>@ViewData["Title"]</h1>
-<div class="container">
+<div>
 
     <div style="margin: 0 0 10px 0;">
         <a asp-action="CatalogCreate" class="btn btn-primary">Crear Producto</a>
     </div>
-
-    <div class="row">
-        <div class="col-10">
-            @if(!Model.Any())
-            {
-                <div class="alert alert-warning">
-                    <p>No se encuentra ingresadas categorias</p>
-                </div>
-            }
-            else 
-            {
-                <table class="table table-striped">
-                    <thead>
+    
+    <div>
+        @if(!Model.Any())
+        {
+            <div class="alert alert-warning">
+                <p>No se encuentra ingresadas categorias</p>
+             </div>
+        }
+        else 
+        {
+            <table class="table table-striped text-center">
+                <thead>
+                     <tr>
+                        <th></th>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Descripción</th>
+                        <th>Imagen</th>
+                        <th>Estado</th>
+                        <th>Categoria</th>
+                        <th>Fecha</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in Model){
                         <tr>
-                            <th></th>
-                            <th>Código</th>
-                            <th>Nombre</th>
-                            <th>Precio</th>
-                            <th>Imagen</th>
-                            <th>Descripción</th>
-                            <th>Categoria</th>
-                            <th>Fecha</th>
-                            <th>Estado</th>
-                            <th></th>
-                            <th></th>
+                            <td>@Html.DisplayFor(modelItem => item.ProductId)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ProductCode)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ProductPrice)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ProductDescription)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ProductImage)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ProductStatus)</td>
+                            <td>@item.Category?.CategoryName</td>
+                            <td>@item.ProductCreationDate.AddHours(-5).ToString("dd-MM-yyyy HH:mm")</td>
+                            <td>
+                                <a asp-controller="Catalog" asp-action="CatalogEdit" asp-route-id="@item.ProductId" class="btn btn-success">Editar</a> 
+                            </td>
+                            <td>
+                                <a asp-controller="Catalog" asp-action="CatalogDelete" asp-route-id="@item.ProductId" class="btn btn-danger">Eliminar</a> 
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach(var item in Model){
-                            <tr>
-                                <td>@Html.DisplayFor(modelItem => item.ProductId)</td>
-                                <td>@Html.DisplayFor(modelItem => item.ProductCode)</td>
-                                <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
-                                <td>@Html.DisplayFor(modelItem => item.ProductPrice)</td>
-                                <td>@Html.DisplayFor(modelItem => item.ProductImage)</td>
-                                <td>@Html.DisplayFor(modelItem => item.ProductDescription)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Category.CategoryName)</td>
-                                <td>@Html.DisplayFor(modelItem => item.ProductCreationDate)</td>
-                                <td>@Html.DisplayFor(modelItem => item.ProductStatus)</td>
-                                <td>
-                                    <a asp-controller="Catalog" asp-action="CatalogEdit" asp-route-id="@item.ProductId" class="btn btn-success">Editar</a> 
-                                </td>
-                                <td>
-                                    <a asp-controller="Catalog" asp-action="CatalogDelete" asp-route-id="@item.ProductId" class="btn btn-danger">Eliminar</a> 
-                                </td>
-                            </tr>
                         }
-                    </tbody>
-                </table>
+                </tbody>
+            </table>
             }
-        </div>
-        <div class="col-6">
-
-        </div>
     </div>
 </div>
