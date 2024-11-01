@@ -20,7 +20,8 @@
                         <div class="card-body">
                           <h4 class="card-title">@Html.DisplayFor(modelItem => item.ProductName)</h4>
                           <p class="card-text">S/. @Html.DisplayFor(modelItem => item.ProductPrice)</p>
-                          <a class="btn btn-primary" asp-action="AddCar" asp-route-id="@item.ProductId">Comprar</a>
+                          <a class="btn btn-primary" asp-action="Buy" asp-route-id="@item.ProductId">Comprar</a>
+                          <a class="btn btn-success" asp-action="CatalogDetail" asp-route-id="@item.ProductId">Detalles</a>
                         </div>
                     </div>
                   </div>

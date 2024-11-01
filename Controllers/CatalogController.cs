@@ -28,7 +28,7 @@ namespace Ecommerce_.Controllers
 
         public ActionResult CatalogList()
         {
-           var products = _context.Productos.Include(p => p.Category).ToList();
+           var products = _context.Productos.Include(p => p.Category).OrderBy(c => c.ProductId).ToList();
             return View(products);
         }
 
@@ -105,6 +105,16 @@ namespace Ecommerce_.Controllers
             _context.Productos.Remove(product);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(CatalogList));
+        }
+
+        public async Task<IActionResult> CatalogDetail(int id)
+        {
+            Product? product = await _context.Productos.FindAsync(id);
+            if(product == null)
+            {
+                return NotFound();
+            }
+            return View(product);
         }
     }
 }
