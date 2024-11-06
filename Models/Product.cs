@@ -51,6 +51,8 @@ namespace Ecommerce_.Models
         public int CategoryId { get; set; }
         public Category? Category { get; set; }
 
+        public ICollection<Proforma>? Proformas { get; set; }
+
         public Product()
         {
                 ProductCreationDate = DateTime.UtcNow;

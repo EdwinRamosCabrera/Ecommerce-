@@ -17,6 +17,8 @@ public class ApplicationDbContext : IdentityDbContext
 
     public DbSet<Category> Categorias { get; set;}
 
+    public DbSet<Proforma> Proformas { get; set;}
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -32,5 +34,11 @@ public class ApplicationDbContext : IdentityDbContext
             entity.HasKey(c => c.CategoryId);
             entity.HasIndex(c => c.CategoryId).IsUnique();                           
         });
+
+        modelBuilder.Entity<Proforma>().HasOne(p => p.Product)
+                                       .WithMany(c => c.Proformas)
+                                       .HasForeignKey(p=> p.ProductId)
+                                       .HasConstraintName("FK_Proforma_Product")
+                                       .OnDelete(DeleteBehavior.SetNull);
     }
 }

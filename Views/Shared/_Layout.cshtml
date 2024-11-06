@@ -6,7 +6,7 @@
     <title>@ViewData["Title"] - Ecommerce_</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Ecommerce_.styles.css" asp-append-version="true" />
+    @*<link rel="stylesheet" href="~/Ecommerce_.styles.css" asp-append-version="true" />*@
 </head>
 <body>
     <header>
@@ -32,9 +32,6 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Catalog" asp-action="CatalogList">Lista de Productos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Catalog" asp-action="CatalogCreate">Crear Producto</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Categorias</a>
                         </li>
                         <li class="nav-item">
@@ -42,6 +39,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Contact" asp-action="Index">Mensajes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Proforma" asp-action="Index">Carrito</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />

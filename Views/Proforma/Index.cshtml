@@ -1,0 +1,45 @@
+@model IEnumerable<Proforma>
+
+@{
+    ViewData["Title"] = "Carrito de compras";
+}
+
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+
+    @if(Model == null)
+    {
+        <div>
+            <p class="alert alert-warning">No hay productos en su carrito</p>
+        </div>
+    }
+    else
+    {   
+        <table class="table table-striped text-center">
+            <thead>
+                <tr>
+                    <th>Imagen</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Subtotal</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model)
+                {
+                    <tr>
+                        <td class="text-center"><img src="@item.Product.ProductImage" alt="@item.Product.ProductName" style="width: 70px"></td>
+                        <td>@Html.DisplayFor(modelItem => item.Product.ProductName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ProformaQuantity)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Product.ProductPrice)</td>
+                        <td></td>
+                        <td><a class="btn btn-danger" asp-action="ProformaDelete" asp-route-id="@item.ProformaId">Eliminar</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    }
+</div>

@@ -1,0 +1,28 @@
+@{
+    ViewData["Title"] = "Carrito de compras";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="Container">
+    <div class="row">
+        <div class="col-6">
+            <img src="@Model.ProductImage" alt="@Model.ProductName" style="width:100%""/>
+        </div>
+        <div class="col-6">
+                <h2>@Model.ProductName</h2>
+                <h3>@Model.ProductCode</h3>
+                <p>@Model.ProductDescription</p>
+                <p>S/. @Model.ProductPrice</p>
+            <form asp-controller="Catalog" asp-action="CatalogAdd">
+                <div class="form-group">
+                    <label asp-for="ProductQuantity" class="form-control">Cantidad: </label>
+                    <input asp-for="ProductQuantity" class="form-control"/>
+                </div>
+                <button type="submit" class="btn btn-primary">Añadir al carrito</button>
+            </form>
+
+            <a class="btn btn-primary" asp-controller="CatalogController" asp-action="CatalogAdd" asp-route-id="@Model.ProductId">Añadir al carrito</a>
+        </div>
+    </div>
+</div>

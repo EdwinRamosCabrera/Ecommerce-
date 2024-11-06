@@ -15,7 +15,15 @@
             <h2>@Model.ProductName</h2>
             <h3>@Model.ProductCode</h3>
             <p>@Model.ProductDescription</p>
-            <a class="btn btn-primary">Comprar</a>
+            <p>S/. @Model.ProductPrice</p>
+
+            <form asp-action="CatalogCar" asp-controller="Catalog" method="post">
+                <input type="hidden" name="Id" value="@Model.ProductId">
+                <label for="quantity">Cantidad:</label>
+                <input type="number" id="quantity" name="quantity" value="1" min="1">
+                <button type="submit" class="btn btn-primary">Añadir al carrito</button>
+            </form>
+
         </div>
     </div>
 </div>

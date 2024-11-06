@@ -8,16 +8,19 @@ using Ecommerce_.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace Ecommerce_.Controllers
 {
     public class CatalogController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public CatalogController(ApplicationDbContext context)
+        public CatalogController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public ActionResult Index()
@@ -107,14 +110,45 @@ namespace Ecommerce_.Controllers
             return RedirectToAction(nameof(CatalogList));
         }
 
-        public async Task<IActionResult> CatalogDetail(int id)
+        public async Task<IActionResult> CatalogCar(int Id)
         {
-            Product? product = await _context.Productos.FindAsync(id);
+            Product? product = await _context.Productos.FindAsync(Id);
             if(product == null)
             {
                 return NotFound();
             }
             return View(product);
         }
+
+        [HttpPost]
+        public IActionResult CatalogCar(int Id, int quantity)
+        {
+            Console.WriteLine(Id);
+            var userId = _userManager.GetUserName(User);
+            if(userId == null)
+            {
+                Console.WriteLine("No hay usuario");
+                return RedirectToAction(nameof(CatalogMessage));
+            }
+            
+                Console.WriteLine("Bienvenido");
+                var product = _context.Productos.Find(Id);
+                
+                Proforma proforma = new Proforma();
+                proforma.ProductId = product.ProductId;
+                proforma.ProformaQuantity = quantity;
+                proforma.UserId = userId;
+                _context.Proformas.Add(proforma);
+                _context.SaveChanges();
+                Console.WriteLine("Añadido al carrito");
+                return RedirectToAction("Index", "Proforma");
+            
+        }
+
+        public IActionResult CatalogMessage()
+        {
+            return View();
+        }
+
     }
 }
