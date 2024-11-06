@@ -22,5 +22,7 @@ namespace Ecommerce_.Models
 
         [Required]
         public string UserId { get; set; }
+
+        public decimal ProformaSubtotal => ProformaQuantity * Product.ProductPrice;
     }
 }

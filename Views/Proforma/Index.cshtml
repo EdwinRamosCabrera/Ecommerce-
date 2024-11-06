@@ -2,11 +2,12 @@
 
 @{
     ViewData["Title"] = "Carrito de compras";
+    var Subtotal = 0;
 }
 
 <div class="container">
     <h1>@ViewData["Title"]</h1>
-
+    
     @if(Model == null)
     {
         <div>
@@ -34,12 +35,14 @@
                         <td>@Html.DisplayFor(modelItem => item.Product.ProductName)</td>
                         <td>@Html.DisplayFor(modelItem => item.ProformaQuantity)</td>
                         <td>@Html.DisplayFor(modelItem => item.Product.ProductPrice)</td>
-                        <td></td>
+                        <td>@item.ProformaSubtotal</td>
                         <td><a class="btn btn-danger" asp-action="ProformaDelete" asp-route-id="@item.ProformaId">Eliminar</a></td>
                     </tr>
                 }
             </tbody>
         </table>
-
+        <div class="text-end me-5">
+            <h4>Total : S/. @Model.Sum(p=>p.ProformaSubtotal)</h4>
+        </div>
     }
 </div>
