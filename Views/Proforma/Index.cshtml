@@ -2,12 +2,11 @@
 
 @{
     ViewData["Title"] = "Carrito de compras";
-    var Subtotal = 0;
 }
 
 <div class="container">
     <h1>@ViewData["Title"]</h1>
-    
+    <a class="btn btn-primary" asp-controller="Payment" asp-action="PaymentCreate">Pagar</a>
     @if(Model == null)
     {
         <div>
@@ -34,7 +33,7 @@
                         <td class="text-center"><img src="@item.Product.ProductImage" alt="@item.Product.ProductName" style="width: 70px"></td>
                         <td>@Html.DisplayFor(modelItem => item.Product.ProductName)</td>
                         <td>@Html.DisplayFor(modelItem => item.ProformaQuantity)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Product.ProductPrice)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ProductPrice)</td>
                         <td>@item.ProformaSubtotal</td>
                         <td><a class="btn btn-danger" asp-action="ProformaDelete" asp-route-id="@item.ProformaId">Eliminar</a></td>
                     </tr>

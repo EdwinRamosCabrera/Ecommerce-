@@ -19,6 +19,8 @@ public class ApplicationDbContext : IdentityDbContext
 
     public DbSet<Proforma> Proformas { get; set;}
 
+    public DbSet<Payment> Pagos { get; set;}
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

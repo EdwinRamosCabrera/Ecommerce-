@@ -4,28 +4,32 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Ecommerce_.Models
-{
-    public class Proforma
+{   
+    [Table("Pedidos")]
+    public class Order
     {   
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public int ProformaId { get; set; }
+        public int OrderId { get; set; }    
 
         [Required]
-        public int ProformaQuantity { get; set; }
+        [Column("Monto_Total")]
+        public decimal AmountTotal { get; set; }
 
         [Required]
-        public int ProductId { get; set; }
-        public Product? Product { get; set; }
+        [Column("Estado")]
+        public string Status { get; set; }
 
         [Required]
-        public decimal ProductPrice { get; set; }
-
-        [Required]
+        [Column("Usuario")]
         public string UserId { get; set; }
 
-        public decimal ProformaSubtotal => ProformaQuantity * ProductPrice;
+        public int PaymentId { get; set; }
+
+        public Payment? Payment { get; set; }    
+
     }
 }

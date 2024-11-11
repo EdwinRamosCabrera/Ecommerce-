@@ -56,6 +56,7 @@ namespace Ecommerce_.Controllers
                 proforma.ProductId = product.ProductId;
                 proforma.ProformaQuantity = 1;
                 proforma.UserId = userId;
+                proforma.ProductPrice = product.ProductPrice;
                 _context.Proformas.Add(proforma);
                 _context.SaveChanges();
                 Console.WriteLine("Añadido al carrito");
@@ -77,6 +78,7 @@ namespace Ecommerce_.Controllers
             }
             _context.Proformas.Remove(proforma);
             _context.SaveChanges();
+
             return RedirectToAction(nameof(Index));
         }
     }

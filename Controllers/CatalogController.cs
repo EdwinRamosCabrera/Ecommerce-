@@ -123,7 +123,6 @@ namespace Ecommerce_.Controllers
         [HttpPost]
         public IActionResult CatalogCar(int Id, int quantity)
         {
-            Console.WriteLine(Id);
             var userId = _userManager.GetUserName(User);
             if(userId == null)
             {
@@ -131,18 +130,20 @@ namespace Ecommerce_.Controllers
                 return RedirectToAction(nameof(CatalogMessage));
             }
             
-                Console.WriteLine("Bienvenido");
                 var product = _context.Productos.Find(Id);
-                
+                if(product == null)
+                {
+                    return NotFound();
+                }
+                    
                 Proforma proforma = new Proforma();
                 proforma.ProductId = product.ProductId;
                 proforma.ProformaQuantity = quantity;
                 proforma.UserId = userId;
+                proforma.ProductPrice = product.ProductPrice;
                 _context.Proformas.Add(proforma);
                 _context.SaveChanges();
-                Console.WriteLine("Añadido al carrito");
                 return RedirectToAction("Index", "Proforma");
-            
         }
 
         public IActionResult CatalogMessage()
