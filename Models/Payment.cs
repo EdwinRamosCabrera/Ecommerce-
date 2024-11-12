@@ -14,7 +14,7 @@ namespace Ecommerce_.Models
         [Key]
         public int PaymentId { get; set; }
 
-        [Column("UsuarioId")]
+        [Column("Usuario")]
         [Required (ErrorMessage = "El campo User es obligatorio")]
         public string UserId { get; set; }
 

@@ -21,6 +21,10 @@ public class ApplicationDbContext : IdentityDbContext
 
     public DbSet<Payment> Pagos { get; set;}
 
+    public DbSet<Order> Pedidos { get; set;}
+
+    public DbSet<OrderDetails> DetallePedidos { get; set;}
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
