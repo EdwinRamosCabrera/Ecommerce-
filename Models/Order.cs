@@ -13,7 +13,7 @@ namespace Ecommerce_.Models
     {   
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public int OrderId { get; set; }    
+        public int Id { get; set; }    
 
         [Required]
         [Column("Usuario")]
@@ -30,25 +30,27 @@ namespace Ecommerce_.Models
 
         [Required]
         [Column("Estado")]
-        public string Status { get; set; }
+        public string State { get; set; }
         
-        [Required]
+        [Required (ErrorMessage = "El campo Nombre es obligatorio")]
         [Column("Nombre")]
         public string Name { get; set; }
 
-        [Required]
+        [Required (ErrorMessage = "El campo Apellido es obligatorio")]
         [Column("Apellido")]
         public string LastName { get; set; } 
 
-        [Required]
+        [Required (ErrorMessage = "El campo Correo es obligatorio")]
         [Column("Correo")]
         public string Email { get; set; }
         
-        [Required]
+        [Required (ErrorMessage = "El campo Teléfono es obligatorio")]
         [Column("Teléfono")]
         public string Phone { get; set; }   
 
-        [Required]
+        [Column("Dirección")]
+        public string? Address { get; set; } 
+
         [Column("Observaciones")]
         public string? Observations { get; set; }
         

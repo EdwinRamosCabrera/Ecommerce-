@@ -12,32 +12,57 @@
             <form method="post" asp-controller="Payment" asp-action="PaymentCreate">
                 <input type="hidden" asp-for="UserId"/>
                 <input type="hidden" asp-for="AmountTotal"/>
-                <div class="form-group">
-                    <label asp-for="NameCard">Nombre de la Tarjeta:</label>
-                    <input asp-for="NameCard" class="form-control" autofocus />
-                    <span asp-validation-for="NameCard" class="text-danger"></span>
+                <div class="col-6">
+                    <div>
+                        <label for="name">Nombres:</label>
+                        <input type="text" id="name" name="name"/>
+                    </div>
+                    <div>
+                        <label for="lastName">Apellidos:</label>
+                        <input type="text" id="lastName" name="lastName"/>
+                    </div>
+                    <div>
+                        <label for="email">Correo Electrónico:</label>
+                        <input type="text" id="email" name="email"/>
+                    </div>
+                    <div>
+                        <label for="phone">Teléfono:</label>
+                        <input type="text" id="phone" name="phone"/>
+                    </div>
+                    <div>
+                        <label for="address">Dirección:</label>
+                        <input type="text" id="address" name="address"/>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label asp-for="NumberCard">Numero de la Tarjeta:</label>
-                    <input asp-for="NumberCard" class="form-control" />
-                    <span asp-validation-for="NumberCard" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="DueDateYYMM">Fecha de Caducidad:</label>
-                    <input asp-for="DueDateYYMM" class="form-control" placeholder="Mes/Año" />
-                    <span asp-validation-for="DueDateYYMM" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Cvv">Código de Seguridad de la Tarjeta:</label>
-                    <input asp-for="Cvv" class="form-control" placeholder="111" maxlength="3" />
-                    <span asp-validation-for="Cvv" class="text-danger"></span>
-                </div>
-                <div>
-                    <h3>Total a Pagar: S/. @Model.AmountTotal</h3>
-                </div>
-                <br>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Realizar Pago</button>
+
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="NameCard">Nombre de la Tarjeta:</label>
+                        <input asp-for="NameCard" class="form-control" autofocus />
+                        <span asp-validation-for="NameCard" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NumberCard">Numero de la Tarjeta:</label>
+                        <input asp-for="NumberCard" class="form-control" />
+                        <span asp-validation-for="NumberCard" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DueDateYYMM">Fecha de Caducidad:</label>
+                        <input asp-for="DueDateYYMM" class="form-control" placeholder="Mes/Año" />
+                        <span asp-validation-for="DueDateYYMM" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Cvv">Código de Seguridad de la Tarjeta:</label>
+                        <input asp-for="Cvv" class="form-control" placeholder="111" maxlength="3" />
+                        <span asp-validation-for="Cvv" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <h3>Total a Pagar: S/. @Model.AmountTotal</h3>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Realizar Pago</button>
+                    </div>
                 </div>
             </form>
         </div>

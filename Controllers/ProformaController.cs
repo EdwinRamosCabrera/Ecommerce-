@@ -53,10 +53,11 @@ namespace Ecommerce_.Controllers
                     return NotFound();
                 }
                 Proforma proforma = new Proforma();
-                proforma.ProductId = product.ProductId;
-                proforma.ProformaQuantity = 1;
+                proforma.ProductId = product.Id;
+                proforma.Quantity = 1;
                 proforma.UserId = userId;
-                proforma.ProductPrice = product.ProductPrice;
+                proforma.Price = product.Price;
+                proforma.State = "PENDIENTE";
                 _context.Proformas.Add(proforma);
                 _context.SaveChanges();
                 Console.WriteLine("Añadido al carrito");

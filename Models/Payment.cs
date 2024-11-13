@@ -12,7 +12,7 @@ namespace Ecommerce_.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public int PaymentId { get; set; }
+        public int Id { get; set; }
 
         [Column("Usuario")]
         [Required (ErrorMessage = "El campo User es obligatorio")]

@@ -28,17 +28,17 @@
             <tbody>
                 @foreach(var item in Model){
                     <tr>
-                        <td>@Html.DisplayFor(modelItem => item.PaymentId)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Id)</td>
                         <td>@Html.DisplayFor(modelItem => item.UserId)</td>
                         <td>@Html.DisplayFor(modelItem => item.NameCard)</td>
                         <td>@item.DatePay.AddHours(-5).ToString("dd-MM-yyyy HH:mm")</td>
                         <td>@Html.DisplayFor(modelItem => item.AmountTotal)</td>
                         <td></td>
                         <td>
-                            <a asp-controller="Payment" asp-action="ContactEdit" asp-route-id="@item.PaymentId" class="btn btn-success">Editar</a> 
+                            <a asp-controller="Payment" asp-action="ContactEdit" asp-route-id="@item.Id" class="btn btn-success">Editar</a> 
                         </td>
                         <td>
-                            <a asp-controller="Payment" asp-action="ContactDelete" asp-route-id="@item.PaymentId" class="btn btn-danger">Eliminar</a> 
+                            <a asp-controller="Payment" asp-action="ContactDelete" asp-route-id="@item.Id" class="btn btn-danger">Eliminar</a> 
                         </td>
                     </tr>
                 }

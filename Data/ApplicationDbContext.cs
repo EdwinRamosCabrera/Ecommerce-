@@ -37,13 +37,13 @@ public class ApplicationDbContext : IdentityDbContext
         
         modelBuilder.Entity<Category>( entity => {
             entity.ToTable("Categorias");
-            entity.HasKey(c => c.CategoryId);
-            entity.HasIndex(c => c.CategoryId).IsUnique();                           
+            entity.HasKey(c => c.Id);
+            entity.HasIndex(c => c.Id).IsUnique();                           
         });
 
         modelBuilder.Entity<Proforma>().HasOne(p => p.Product)
                                        .WithMany(c => c.Proformas)
-                                       .HasForeignKey(p=> p.ProductId)
+                                       .HasForeignKey(p=> p.Id)
                                        .HasConstraintName("FK_Proforma_Product")
                                        .OnDelete(DeleteBehavior.SetNull);
     }

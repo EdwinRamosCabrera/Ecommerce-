@@ -9,16 +9,16 @@
 <div class="Container">
     <div class="row">
         <div class="col-6">
-            <img src="@Model.ProductImage" alt="@Model.ProductName" style="width:100%""/>
+            <img src="@Model.Image" alt="@Model.Name" style="width:100%""/>
         </div>
         <div class="col-6">
-            <h2>@Model.ProductName</h2>
-            <h3>@Model.ProductCode</h3>
-            <p>@Model.ProductDescription</p>
-            <p>S/. @Model.ProductPrice</p>
+            <h2>@Model.Name</h2>
+            <h3>@Model.Code</h3>
+            <p>@Model.Description</p>
+            <p>S/. @Model.Price</p>
 
             <form asp-action="CatalogCar" asp-controller="Catalog" method="post">
-                <input type="hidden" name="Id" value="@Model.ProductId">
+                <input type="hidden" name="Id" value="@Model.Id">
                 <label for="quantity">Cantidad:</label>
                 <input type="number" id="quantity" name="quantity" value="1" min="1">
                 <button type="submit" class="btn btn-primary">Añadir al carrito</button>

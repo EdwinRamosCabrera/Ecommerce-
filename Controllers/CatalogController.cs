@@ -31,20 +31,20 @@ namespace Ecommerce_.Controllers
 
         public ActionResult CatalogList()
         {
-           var products = _context.Productos.Include(p => p.Category).OrderBy(c => c.ProductId).ToList();
+           var products = _context.Productos.Include(p => p.Category).OrderBy(c => c.Id).ToList();
             return View(products);
         }
 
         public ActionResult CatalogCreate()
         {   
-            ViewBag.Category = _context.Categorias.Select(c => new SelectListItem(c.CategoryName, c.CategoryId.ToString()));
+            ViewBag.Category = _context.Categorias.Select(c => new SelectListItem(c.Name, c.Id.ToString()));
             return View();
         }
 
         [HttpPost]
         public ActionResult CatalogCreate(Product product)
         {   
-            ViewBag.Category = _context.Categorias.Select(c => new SelectListItem(c.CategoryName, c.CategoryId.ToString()));
+            ViewBag.Category = _context.Categorias.Select(c => new SelectListItem(c.Name, c.Id.ToString()));
                        if(!ModelState.IsValid)
             {   
                 foreach (var entry in ModelState)
@@ -72,7 +72,7 @@ namespace Ecommerce_.Controllers
             {
                 return NotFound();
             }
-            ViewBag.Category = _context.Categorias.Select(c => new SelectListItem(c.CategoryName, c.CategoryId.ToString()));
+            ViewBag.Category = _context.Categorias.Select(c => new SelectListItem(c.Name, c.Id.ToString()));
             return View(product);
         }
 
@@ -84,14 +84,14 @@ namespace Ecommerce_.Controllers
             {
                 return NotFound();
             }
-            ViewBag.Category = _context.Categorias.Select(c => new SelectListItem(c.CategoryName, c.CategoryId.ToString()));
-            productExisting.ProductId = product.ProductId;
-            productExisting.ProductCode = product.ProductCode;
-            productExisting.ProductName = product.ProductName;
-            productExisting.ProductImage = product.ProductImage;
-            productExisting.ProductDescription = product.ProductDescription;
-            productExisting.ProductPrice = product.ProductPrice;
-            productExisting.ProductStatus = product.ProductStatus;
+            ViewBag.Category = _context.Categorias.Select(c => new SelectListItem(c.Name, c.Id.ToString()));
+            productExisting.Id = product.Id;
+            productExisting.Code = product.Code;
+            productExisting.Name = product.Name;
+            productExisting.Image = product.Image;
+            productExisting.Description = product.Description;
+            productExisting.Price = product.Price;
+            productExisting.State = product.State;
             productExisting.CategoryId = product.CategoryId;
 
             _context.SaveChangesAsync();
@@ -137,10 +137,11 @@ namespace Ecommerce_.Controllers
                 }
                     
                 Proforma proforma = new Proforma();
-                proforma.ProductId = product.ProductId;
-                proforma.ProformaQuantity = quantity;
+                proforma.ProductId = product.Id;
+                proforma.Quantity = quantity;
                 proforma.UserId = userId;
-                proforma.ProductPrice = product.ProductPrice;
+                proforma.Price = product.Price;
+                proforma.State = "PENDIENTE";
                 _context.Proformas.Add(proforma);
                 _context.SaveChanges();
                 return RedirectToAction("Index", "Proforma");
@@ -150,6 +151,5 @@ namespace Ecommerce_.Controllers
         {
             return View();
         }
-
     }
 }

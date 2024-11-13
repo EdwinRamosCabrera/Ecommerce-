@@ -11,12 +11,12 @@ namespace Ecommerce_.Models
     {   
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        [Column("Proforma_Id")]
-        public int ProformaId { get; set; }
+        [Column("Id")]
+        public int Id { get; set; }
 
         [Required]
         [Column("Cantidad")]
-        public int ProformaQuantity { get; set; }
+        public int Quantity { get; set; }
 
         [Required]
         [Column("Producto_Id")]
@@ -25,12 +25,16 @@ namespace Ecommerce_.Models
 
         [Required]
         [Column("Precio")]
-        public decimal ProductPrice { get; set; }
+        public decimal Price { get; set; }
+
+        [Required]
+        [Column("Estado")]
+        public string State { get; set; }
 
         [Required]
         [Column("Usuario")]
         public string UserId { get; set; }
 
-        public decimal ProformaSubtotal => ProformaQuantity * ProductPrice;
+        public decimal Subtotal => Quantity * Price;
     }
 }

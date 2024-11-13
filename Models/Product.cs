@@ -14,38 +14,38 @@ namespace Ecommerce_.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         [Column("Id")]
-        public int ProductId { get; set; }
+        public int Id { get; set; }
 
         [Required (ErrorMessage = "El campo Código es obligatorio")]
         [StringLength(10, ErrorMessage = "El campo permite hasta 10 caracteres")]
         [Column("Codigo")]
-        public string ProductCode { get; set; }
+        public string Code { get; set; }
         
         [Required (ErrorMessage = "El campo Nombre es obligatorio")]
         [StringLength(30, ErrorMessage = "El campo permite hasta 30 caracteres")]
         [Column("Nombre")]
-        public string ProductName { get; set; } 
+        public string Name { get; set; } 
 
 
         [Required (ErrorMessage = "El campo Imagen es obligatorio")]
         [Column("Imagen")]
-        public string ProductImage { get; set; }
+        public string Image { get; set; }
 
         [Required (ErrorMessage = "El campo Descripción es obligatorio")]
         [StringLength(300, ErrorMessage = "El campo permite hasta 300 caracteres")]
         [Column("Descripcion")]
-        public string ProductDescription { get; set; }
+        public string Description { get; set; }
 
         [Required (ErrorMessage = "El campo Precio es obligatorio")]
         [Column("Precio")]
-        public decimal ProductPrice { get; set; }
+        public decimal Price { get; set; }
 
         [Column("Estado")]
-        public string ProductStatus { get; set; }
+        public string State { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy HH:mm}", ApplyFormatInEditMode = true)]
         [Column("Fecha")]
-        public DateTime ProductCreationDate { get; set;}
+        public DateTime CreationDate { get; set;}
 
         [Required (ErrorMessage = "El campo Categoria es obligatorio")]
         [Column("Categoria_Id")]
@@ -56,8 +56,8 @@ namespace Ecommerce_.Models
 
         public Product()
         {
-                ProductCreationDate = DateTime.UtcNow;
-                ProductStatus = "INACTIVO";
+                CreationDate = DateTime.UtcNow;
+                State = "INACTIVO";
         }
     }
 }
