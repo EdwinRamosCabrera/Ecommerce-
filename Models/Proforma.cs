@@ -12,7 +12,7 @@ namespace Ecommerce_.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         [Column("Id")]
-        public int Id { get; set; }
+        public int ProformaId { get; set; }
 
         [Required]
         [Column("Cantidad")]

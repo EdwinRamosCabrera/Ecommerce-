@@ -18,7 +18,7 @@
             <p>S/. @Model.Price</p>
 
             <form asp-action="CatalogCar" asp-controller="Catalog" method="post">
-                <input type="hidden" name="Id" value="@Model.Id">
+                <input type="hidden" name="Id" value="@Model.ProductId">
                 <label for="quantity">Cantidad:</label>
                 <input type="number" id="quantity" name="quantity" value="1" min="1">
                 <button type="submit" class="btn btn-primary">Añadir al carrito</button>

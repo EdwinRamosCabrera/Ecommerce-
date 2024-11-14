@@ -19,7 +19,7 @@ namespace Ecommerce_.Controllers
 
         public ActionResult Index()
         {   
-            var categorias = _context.Categorias.OrderBy(c => c.Id).ToList();
+            var categorias = _context.Categorias.OrderBy(c => c.CategoryId).ToList();
             return View(categorias);
         }
 
@@ -54,7 +54,7 @@ namespace Ecommerce_.Controllers
 
         public ActionResult CategoryEdit(int id)
         {   
-            Category? category = _context.Categorias.FirstOrDefault(c => c.Id == id);
+            Category? category = _context.Categorias.FirstOrDefault(c => c.CategoryId == id);
             if(category == null)
             {
                 return NotFound();

@@ -53,7 +53,7 @@ namespace Ecommerce_.Controllers
                     return NotFound();
                 }
                 Proforma proforma = new Proforma();
-                proforma.ProductId = product.Id;
+                proforma.ProductId = product.ProductId;
                 proforma.Quantity = 1;
                 proforma.UserId = userId;
                 proforma.Price = product.Price;

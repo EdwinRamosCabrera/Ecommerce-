@@ -24,11 +24,12 @@ namespace Ecommerce_.Data.Migrations
 
             modelBuilder.Entity("Ecommerce_.Models.Category", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("Id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CategoryId"));
 
                     b.Property<string>("Code")
                         .IsRequired()
@@ -42,21 +43,19 @@ namespace Ecommerce_.Data.Migrations
                         .HasColumnType("character varying(20)")
                         .HasColumnName("Nombre");
 
-                    b.HasKey("Id");
+                    b.HasKey("CategoryId");
 
-                    b.HasIndex("Id")
-                        .IsUnique();
-
-                    b.ToTable("Categorias", (string)null);
+                    b.ToTable("Categorias");
                 });
 
             modelBuilder.Entity("Ecommerce_.Models.Contact", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ContactId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("Id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ContactId"));
 
                     b.Property<DateTimeOffset>("Date")
                         .HasColumnType("timestamp with time zone")
@@ -90,18 +89,19 @@ namespace Ecommerce_.Data.Migrations
                         .HasColumnType("character varying(12)")
                         .HasColumnName("Telefono");
 
-                    b.HasKey("Id");
+                    b.HasKey("ContactId");
 
                     b.ToTable("Contactos");
                 });
 
             modelBuilder.Entity("Ecommerce_.Models.Order", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("Id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("OrderId"));
 
                     b.Property<string>("Address")
                         .HasColumnType("text")
@@ -149,7 +149,7 @@ namespace Ecommerce_.Data.Migrations
                         .HasColumnType("text")
                         .HasColumnName("Usuario");
 
-                    b.HasKey("Id");
+                    b.HasKey("OrderId");
 
                     b.HasIndex("PaymentId");
 
@@ -158,12 +158,12 @@ namespace Ecommerce_.Data.Migrations
 
             modelBuilder.Entity("Ecommerce_.Models.OrderDetails", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("OrderDetailsId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasColumnName("Id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("OrderDetailsId"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -186,7 +186,7 @@ namespace Ecommerce_.Data.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("Cantidad");
 
-                    b.HasKey("Id");
+                    b.HasKey("OrderDetailsId");
 
                     b.HasIndex("OrderId");
 
@@ -197,11 +197,12 @@ namespace Ecommerce_.Data.Migrations
 
             modelBuilder.Entity("Ecommerce_.Models.Payment", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("PaymentId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("Id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PaymentId"));
 
                     b.Property<decimal>("AmountTotal")
                         .HasColumnType("numeric")
@@ -221,19 +222,19 @@ namespace Ecommerce_.Data.Migrations
                         .HasColumnType("text")
                         .HasColumnName("Usuario");
 
-                    b.HasKey("Id");
+                    b.HasKey("PaymentId");
 
                     b.ToTable("Pagos");
                 });
 
             modelBuilder.Entity("Ecommerce_.Models.Product", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasColumnName("Id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ProductId"));
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("integer")
@@ -275,7 +276,7 @@ namespace Ecommerce_.Data.Migrations
                         .HasColumnType("text")
                         .HasColumnName("Estado");
 
-                    b.HasKey("Id");
+                    b.HasKey("ProductId");
 
                     b.HasIndex("CategoryId");
 
@@ -284,10 +285,12 @@ namespace Ecommerce_.Data.Migrations
 
             modelBuilder.Entity("Ecommerce_.Models.Proforma", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ProformaId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasColumnName("Id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ProformaId"));
 
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric")
@@ -311,7 +314,9 @@ namespace Ecommerce_.Data.Migrations
                         .HasColumnType("text")
                         .HasColumnName("Usuario");
 
-                    b.HasKey("Id");
+                    b.HasKey("ProformaId");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("Proformas");
                 });
@@ -549,11 +554,10 @@ namespace Ecommerce_.Data.Migrations
             modelBuilder.Entity("Ecommerce_.Models.Product", b =>
                 {
                     b.HasOne("Ecommerce_.Models.Category", "Category")
-                        .WithMany("Products")
+                        .WithMany()
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.SetNull)
-                        .IsRequired()
-                        .HasConstraintName("FK_Category_Product");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Category");
                 });
@@ -562,10 +566,9 @@ namespace Ecommerce_.Data.Migrations
                 {
                     b.HasOne("Ecommerce_.Models.Product", "Product")
                         .WithMany("Proformas")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.SetNull)
-                        .IsRequired()
-                        .HasConstraintName("FK_Proforma_Product");
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Product");
                 });
@@ -619,11 +622,6 @@ namespace Ecommerce_.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Ecommerce_.Models.Category", b =>
-                {
-                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("Ecommerce_.Models.Product", b =>

@@ -13,7 +13,7 @@ namespace Ecommerce_.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         [Column("Id")]
-        public int Id { get; set; }
+        public int OrderDetailsId { get; set; }
 
         [Required]
         [Column("Pedido_Id")]

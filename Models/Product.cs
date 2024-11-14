@@ -14,7 +14,7 @@ namespace Ecommerce_.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         [Column("Id")]
-        public int Id { get; set; }
+        public int ProductId { get; set; }
 
         [Required (ErrorMessage = "El campo Código es obligatorio")]
         [StringLength(10, ErrorMessage = "El campo permite hasta 10 caracteres")]

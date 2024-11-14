@@ -25,26 +25,4 @@ public class ApplicationDbContext : IdentityDbContext
 
     public DbSet<OrderDetails> DetallePedidos { get; set;}
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        base.OnModelCreating(modelBuilder);
-
-        modelBuilder.Entity<Product>().HasOne(p => p.Category)
-                                      .WithMany(c => c.Products)
-                                      .HasForeignKey(p => p.CategoryId)
-                                      .HasConstraintName("FK_Category_Product")
-                                      .OnDelete(DeleteBehavior.SetNull);
-        
-        modelBuilder.Entity<Category>( entity => {
-            entity.ToTable("Categorias");
-            entity.HasKey(c => c.Id);
-            entity.HasIndex(c => c.Id).IsUnique();                           
-        });
-
-        modelBuilder.Entity<Proforma>().HasOne(p => p.Product)
-                                       .WithMany(c => c.Proformas)
-                                       .HasForeignKey(p=> p.Id)
-                                       .HasConstraintName("FK_Proforma_Product")
-                                       .OnDelete(DeleteBehavior.SetNull);
-    }
 }

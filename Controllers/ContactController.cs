@@ -21,7 +21,7 @@ namespace Ecommerce_.Controllers
 
         public IActionResult Index()
         {   
-            var contactos = _context.Contactos.OrderBy(c => c.Id).ToList();
+            var contactos = _context.Contactos.OrderBy(c => c.ContactId).ToList();
             return View(contactos);
         }
 

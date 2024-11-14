@@ -13,7 +13,8 @@ namespace Ecommerce_.Models
     {   
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public int Id { get; set; }
+        [Column("Id")]
+        public int ContactId { get; set; }
 
         [Required (ErrorMessage = "El campo Nombres es obligatorio")]
         [StringLength(30, ErrorMessage = "El campo no puede tener mas de 30 caracteres")]

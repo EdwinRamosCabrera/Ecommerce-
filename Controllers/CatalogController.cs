@@ -31,20 +31,20 @@ namespace Ecommerce_.Controllers
 
         public ActionResult CatalogList()
         {
-           var products = _context.Productos.Include(p => p.Category).OrderBy(c => c.Id).ToList();
+           var products = _context.Productos.Include(p => p.Category).OrderBy(c => c.ProductId).ToList();
             return View(products);
         }
 
         public ActionResult CatalogCreate()
         {   
-            ViewBag.Category = _context.Categorias.Select(c => new SelectListItem(c.Name, c.Id.ToString()));
+            ViewBag.Category = _context.Categorias.Select(c => new SelectListItem(c.Name, c.CategoryId.ToString()));
             return View();
         }
 
         [HttpPost]
         public ActionResult CatalogCreate(Product product)
         {   
-            ViewBag.Category = _context.Categorias.Select(c => new SelectListItem(c.Name, c.Id.ToString()));
+            ViewBag.Category = _context.Categorias.Select(c => new SelectListItem(c.Name, c.CategoryId.ToString()));
                        if(!ModelState.IsValid)
             {   
                 foreach (var entry in ModelState)
@@ -72,7 +72,7 @@ namespace Ecommerce_.Controllers
             {
                 return NotFound();
             }
-            ViewBag.Category = _context.Categorias.Select(c => new SelectListItem(c.Name, c.Id.ToString()));
+            ViewBag.Category = _context.Categorias.Select(c => new SelectListItem(c.Name, c.CategoryId.ToString()));
             return View(product);
         }
 
@@ -84,8 +84,8 @@ namespace Ecommerce_.Controllers
             {
                 return NotFound();
             }
-            ViewBag.Category = _context.Categorias.Select(c => new SelectListItem(c.Name, c.Id.ToString()));
-            productExisting.Id = product.Id;
+            ViewBag.Category = _context.Categorias.Select(c => new SelectListItem(c.Name, c.CategoryId.ToString()));
+            productExisting.ProductId = product.ProductId;
             productExisting.Code = product.Code;
             productExisting.Name = product.Name;
             productExisting.Image = product.Image;
@@ -137,7 +137,7 @@ namespace Ecommerce_.Controllers
                 }
                     
                 Proforma proforma = new Proforma();
-                proforma.ProductId = product.Id;
+                proforma.ProductId = product.ProductId;
                 proforma.Quantity = quantity;
                 proforma.UserId = userId;
                 proforma.Price = product.Price;

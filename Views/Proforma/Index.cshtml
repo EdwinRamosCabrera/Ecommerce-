@@ -19,9 +19,6 @@
             <thead>
                 <tr>
                     <th>Imagen</th>
-    using Microsoft.AspNetCore.Http.HttpResults;
-    using Microsoft.AspNetCore.Http.HttpResults;
-    using Microsoft.AspNetCore.Http.HttpResults;
                     <th>Producto</th>
                     <th>Cantidad</th>
                     <th>Precio</th>
@@ -39,9 +36,9 @@
                         <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
                         <td>@Html.DisplayFor(modelItem => item.Price)</td>
                         <td>@item.Subtotal</td>
-                        <td>@Html.DisplayFor(modelItem => item.Price)</td>
-                        <td>@item.State</td>
-                        <td><a class="btn btn-danger" asp-action="ProformaDelete" asp-route-id="@item.Id">Eliminar</a></td>
+                        <td>@Html.DisplayFor(modelItem => item.State)</td>
+                        <td><a class="btn btn-primary" asp-action="ProformaEdit" asp-route-id="@item.ProformaId">Editar</a></td>
+                        <td><a class="btn btn-danger" asp-action="ProformaDelete" asp-route-id="@item.ProformaId">Eliminar</a></td>
                     </tr>
                 }
             </tbody>

@@ -12,8 +12,9 @@ namespace Ecommerce_.Models
     public class Order
     {   
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
-        public int Id { get; set; }    
+        [Key] 
+        [Column("Id")]
+        public int OrderId { get; set; }    
 
         [Required]
         [Column("Usuario")]

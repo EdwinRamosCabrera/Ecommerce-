@@ -23,8 +23,8 @@ namespace Ecommerce_.Controllers
 
         public IActionResult Index()
         {
-            var pagos =_context.Pagos.ToList();
-            return View(pagos);
+            var payment =_context.Pagos.ToList();
+            return View(payment);
         }
 
         public IActionResult PaymentCreate()
@@ -53,7 +53,7 @@ namespace Ecommerce_.Controllers
             _context.SaveChanges();
 
             Order order = new Order();
-            order.PaymentId = payment.Id;
+            order.PaymentId = payment.PaymentId;
             order.UserId = payment.UserId;
             order.AmountTotal = payment.AmountTotal;
             order.State = "PENDIENTE";
@@ -69,12 +69,16 @@ namespace Ecommerce_.Controllers
             foreach(var item in proforma)
             {
                 item.State = "PROCESADO";
+                _context.SaveChanges();
+
                 OrderDetails orderDetails = new OrderDetails();
-                orderDetails.Id = order.Id;
-                orderDetails.Id = item.Id;
+                orderDetails.OrderId = order.OrderId;
+                orderDetails.ProformaId = item.ProformaId;
                 orderDetails.Name = item.Product.Name;
                 orderDetails.Quantity = item.Quantity;
                 orderDetails.Price = item.Price;
+                _context.DetallePedidos.Add(orderDetails);
+                _context.SaveChanges();
             }
 
             return RedirectToAction(nameof(Index));

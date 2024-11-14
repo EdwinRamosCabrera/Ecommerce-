@@ -29,7 +29,7 @@
             <tbody>
                 @foreach(var item in Model){
                     <tr>
-                        <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ContactId)</td>
                         <td>@Html.DisplayFor(modelItem => item.Name)</td>
                         <td>@Html.DisplayFor(modelItem => item.LastName)</td>
                         <td>@Html.DisplayFor(modelItem => item.Email)</td>
@@ -37,10 +37,10 @@
                         <td>@Html.DisplayFor(modelItem => item.Message)</td>
                         <td>@item.Date.ToOffset(TimeSpan.FromHours(-5)).ToString("dd-MM-yyyy HH:mm")</td>
                         <td>
-                            <a asp-controller="Contact" asp-action="ContactEdit" asp-route-id="@item.Id" class="btn btn-success">Editar</a> 
+                            <a asp-controller="Contact" asp-action="ContactEdit" asp-route-id="@item.ContactId" class="btn btn-success">Editar</a> 
                         </td>
                         <td>
-                            <a asp-controller="Contact" asp-action="ContactDelete" asp-route-id="@item.Id" class="btn btn-danger">Eliminar</a> 
+                            <a asp-controller="Contact" asp-action="ContactDelete" asp-route-id="@item.ContactId" class="btn btn-danger">Eliminar</a> 
                         </td>
                     </tr>
                 }
