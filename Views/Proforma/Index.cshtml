@@ -23,6 +23,7 @@
                     <th>Cantidad</th>
                     <th>Precio</th>
                     <th>Subtotal</th>
+                    <th>Estado</th>
                     <th></th>
                 </tr>
             </thead>
@@ -30,18 +31,20 @@
                 @foreach(var item in Model)
                 {
                     <tr>
-                        <td class="text-center"><img src="@item.Product.ProductImage" alt="@item.Product.ProductName" style="width: 70px"></td>
-                        <td>@Html.DisplayFor(modelItem => item.Product.ProductName)</td>
-                        <td>@Html.DisplayFor(modelItem => item.ProformaQuantity)</td>
-                        <td>@Html.DisplayFor(modelItem => item.ProductPrice)</td>
-                        <td>@item.ProformaSubtotal</td>
+                        <td class="text-center"><img src="@item.Product.Image" alt="@item.Product.Name" style="width: 70px"></td>
+                        <td>@Html.DisplayFor(modelItem => item.Product.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                        <td>@item.Subtotal</td>
+                        <td>@Html.DisplayFor(modelItem => item.State)</td>
+                        <td><a class="btn btn-primary" asp-action="ProformaEdit" asp-route-id="@item.ProformaId">Editar</a></td>
                         <td><a class="btn btn-danger" asp-action="ProformaDelete" asp-route-id="@item.ProformaId">Eliminar</a></td>
                     </tr>
                 }
             </tbody>
         </table>
         <div class="text-end me-5">
-            <h4>Total : S/. @Model.Sum(p=>p.ProformaSubtotal)</h4>
+            <h4>Total : S/. @Model.Sum(p => p.Subtotal)</h4>
         </div>
     }
-</div>
+</div> 

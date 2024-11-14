@@ -21,26 +21,8 @@ public class ApplicationDbContext : IdentityDbContext
 
     public DbSet<Payment> Pagos { get; set;}
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        base.OnModelCreating(modelBuilder);
+    public DbSet<Order> Pedidos { get; set;}
 
-        modelBuilder.Entity<Product>().HasOne(p => p.Category)
-                                      .WithMany(c => c.Products)
-                                      .HasForeignKey(p => p.CategoryId)
-                                      .HasConstraintName("FK_Category_Product")
-                                      .OnDelete(DeleteBehavior.SetNull);
-        
-        modelBuilder.Entity<Category>( entity => {
-            entity.ToTable("Categorias");
-            entity.HasKey(c => c.CategoryId);
-            entity.HasIndex(c => c.CategoryId).IsUnique();                           
-        });
+    public DbSet<OrderDetails> DetallePedidos { get; set;}
 
-        modelBuilder.Entity<Proforma>().HasOne(p => p.Product)
-                                       .WithMany(c => c.Proformas)
-                                       .HasForeignKey(p=> p.ProductId)
-                                       .HasConstraintName("FK_Proforma_Product")
-                                       .OnDelete(DeleteBehavior.SetNull);
-    }
 }

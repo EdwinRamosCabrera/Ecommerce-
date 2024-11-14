@@ -68,7 +68,6 @@ namespace Ecommerce_.Controllers
             _context.Update(category);
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
-
         }
 
         public ActionResult CategoryDelete(int id)

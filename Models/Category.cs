@@ -11,17 +11,18 @@ namespace Ecommerce_.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
+        [Column("Id")]
         public int CategoryId { get; set; }
 
         [Required (ErrorMessage = "El campo Código es obligatorio")]
         [StringLength(10, ErrorMessage = "El campo permite hasta 10 caracteres")]
         [Column("Codigo")]
-        public string CategoryCode { get; set; }
+        public string Code { get; set; }
 
         [Required (ErrorMessage = "El campo Nombre es obligatorio")]
         [StringLength(20, ErrorMessage = "El campo permite hasta 20 caracteres")]
         [Column("Nombre")]
-        public string CategoryName { get; set; }
+        public string Name { get; set; }
 
         [NotMapped]
         public ICollection<Product>? Products { get; set; }

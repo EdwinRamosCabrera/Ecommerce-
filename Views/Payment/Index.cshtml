@@ -9,7 +9,7 @@
 <main class="Container text-center">
     @if(!Model.Any() || Model == null){
         <div class="alert alert-warning">
-            <p>Todavia no sean realizado pagos</p>
+            <p>Aún no se han registrado pagos</p>
         </div>
     }
     else{
@@ -31,11 +31,14 @@
                         <td>@Html.DisplayFor(modelItem => item.PaymentId)</td>
                         <td>@Html.DisplayFor(modelItem => item.UserId)</td>
                         <td>@Html.DisplayFor(modelItem => item.NameCard)</td>
-                        <td>@item.DatePay.AddHours(-5).ToString("dd-MM-yyyy HH:mm")</td>
+                        <td>@item.DatePay.AddHours(-5).ToString("dd-MM-yyyy")</td>
                         <td>@Html.DisplayFor(modelItem => item.AmountTotal)</td>
                         <td></td>
                         <td>
                             <a asp-controller="Payment" asp-action="ContactEdit" asp-route-id="@item.PaymentId" class="btn btn-success">Editar</a> 
+                        </td>
+                        <td>
+                            <a asp-controller="Order" asp-action="OrderList" asp-route-id="@item.PaymentId" class="btn btn-primary" >Ver Pedido</a>
                         </td>
                         <td>
                             <a asp-controller="Payment" asp-action="ContactDelete" asp-route-id="@item.PaymentId" class="btn btn-danger">Eliminar</a> 

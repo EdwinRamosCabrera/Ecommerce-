@@ -30,12 +30,12 @@
                 @foreach(var item in Model){
                     <tr>
                         <td>@Html.DisplayFor(modelItem => item.ContactId)</td>
-                        <td>@Html.DisplayFor(modelItem => item.ContactName)</td>
-                        <td>@Html.DisplayFor(modelItem => item.ContactLastName)</td>
-                        <td>@Html.DisplayFor(modelItem => item.ContactEmail)</td>
-                        <td>@Html.DisplayFor(modelItem => item.ContactPhone)</td>
-                        <td>@Html.DisplayFor(modelItem => item.ContactMessage)</td>
-                        <td>@item.ContactDate.ToOffset(TimeSpan.FromHours(-5)).ToString("dd-MM-yyyy HH:mm")</td>
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Phone)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Message)</td>
+                        <td>@item.Date.ToOffset(TimeSpan.FromHours(-5)).ToString("dd-MM-yyyy HH:mm")</td>
                         <td>
                             <a asp-controller="Contact" asp-action="ContactEdit" asp-route-id="@item.ContactId" class="btn btn-success">Editar</a> 
                         </td>

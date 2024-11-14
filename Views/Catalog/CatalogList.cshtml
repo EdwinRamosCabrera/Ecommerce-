@@ -15,7 +15,7 @@
         @if(!Model.Any())
         {
             <div class="alert alert-warning">
-                <p>No se encuentra ingresados Productos</p>
+                <p>Aún no se han registrado Productos</p>
              </div>
         }
         else 
@@ -23,7 +23,7 @@
             <table class="table table-striped text-center">
                 <thead>
                      <tr>
-                        <th></th>
+                        <th>Id</th>
                         <th>Código</th>
                         <th>Nombre</th>
                         <th>Precio</th>
@@ -40,14 +40,14 @@
                     @foreach(var item in Model){
                         <tr>
                             <td>@Html.DisplayFor(modelItem => item.ProductId)</td>
-                            <td>@Html.DisplayFor(modelItem => item.ProductCode)</td>
-                            <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
-                            <td>@Html.DisplayFor(modelItem => item.ProductPrice)</td>
-                            <td>@Html.DisplayFor(modelItem => item.ProductDescription)</td>
-                            <td>@Html.DisplayFor(modelItem => item.ProductImage)</td>
-                            <td>@Html.DisplayFor(modelItem => item.ProductStatus)</td>
-                            <td>@item.Category?.CategoryName</td>
-                            <td>@item.ProductCreationDate.AddHours(-5).ToString("dd-MM-yyyy HH:mm")</td>
+                            <td>@Html.DisplayFor(modelItem => item.Code)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Image)</td>
+                            <td>@Html.DisplayFor(modelItem => item.State)</td>
+                            <td>@item.Category?.Name</td>
+                            <td>@item.CreationDate.AddHours(-5).ToString("dd-MM-yyyy HH:mm")</td>
                             <td>
                                 <a asp-controller="Catalog" asp-action="CatalogEdit" asp-route-id="@item.ProductId" class="btn btn-success">Editar</a> 
                             </td>

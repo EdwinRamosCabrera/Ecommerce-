@@ -7,6 +7,7 @@ using Ecommerce_.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Razor.Language;
+using Microsoft.EntityFrameworkCore;
 
 namespace Ecommerce_.Controllers
 {
@@ -22,8 +23,8 @@ namespace Ecommerce_.Controllers
 
         public IActionResult Index()
         {
-            var pagos =_context.Pagos.ToList();
-            return View(pagos);
+            var payment =_context.Pagos.ToList();
+            return View(payment);
         }
 
         public IActionResult PaymentCreate()
@@ -34,7 +35,7 @@ namespace Ecommerce_.Controllers
             {
                 return NotFound();
             }
-            var total = proforma.Sum(p => p.ProformaQuantity*p.ProductPrice);
+            var total = proforma.Sum(p => p.Quantity * p.Price);
 
             Payment payment= new Payment();
             payment.UserId = userId;
@@ -43,13 +44,43 @@ namespace Ecommerce_.Controllers
         }
 
         [HttpPost]
-        public IActionResult PaymentCreate(Payment payment)
+        public IActionResult PaymentCreate(string name, string lastName, string email, string phone, string address, Payment payment)
         {
             payment.DatePay = DateTime.UtcNow;
             Console.WriteLine(payment.DatePay);
             Console.WriteLine(payment.AmountTotal);
             _context.Pagos.Add(payment);
             _context.SaveChanges();
+
+            Order order = new Order();
+            order.PaymentId = payment.PaymentId;
+            order.UserId = payment.UserId;
+            order.AmountTotal = payment.AmountTotal;
+            order.State = "PENDIENTE";
+            order.Name = name;
+            order.LastName = lastName;
+            order.Email = email;
+            order.Phone = phone;
+            order.Address = address;
+            _context.Pedidos.Add(order);
+            _context.SaveChanges();
+
+            var proforma = _context.Proformas.Include(p => p.Product).Where(p => p.UserId == payment.UserId).ToList();
+            foreach(var item in proforma)
+            {
+                item.State = "PROCESADO";
+                _context.SaveChanges();
+
+                OrderDetails orderDetails = new OrderDetails();
+                orderDetails.OrderId = order.OrderId;
+                orderDetails.ProformaId = item.ProformaId;
+                orderDetails.Name = item.Product.Name;
+                orderDetails.Quantity = item.Quantity;
+                orderDetails.Price = item.Price;
+                _context.DetallePedidos.Add(orderDetails);
+                _context.SaveChanges();
+            }
+
             return RedirectToAction(nameof(Index));
         }
     }

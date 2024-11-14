@@ -53,17 +53,17 @@ namespace Ecommerce_.Controllers
         }
 
         [HttpPost]
-        public IActionResult ContactEdit(int id, [Bind("ContactId, ContactName, ContactLastName, ContactEmail, ContactPhone, ContactMessage")]Contact UpdateContact)
+        public IActionResult ContactEdit(int id, [Bind("ContactId, ContactName, ContactLastName, ContactEmail, ContactPhone, ContactMessage")] Contact updateContact)
         {   
             var contactExisting = _context.Contactos.Find(id);   
             if(contactExisting == null){
                 return NotFound();
             }
-            contactExisting.ContactName = UpdateContact.ContactName;
-            contactExisting.ContactLastName = UpdateContact.ContactLastName;
-            contactExisting.ContactEmail = UpdateContact.ContactEmail;
-            contactExisting.ContactPhone = UpdateContact.ContactPhone;
-            contactExisting.ContactMessage = UpdateContact.ContactMessage;
+            contactExisting.Name = updateContact.Name;
+            contactExisting.Name = updateContact.LastName;
+            contactExisting.Email = updateContact.Email;
+            contactExisting.Phone = updateContact.Phone;
+            contactExisting.Message = updateContact.Message;
   
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));

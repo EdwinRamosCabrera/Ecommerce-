@@ -13,39 +13,40 @@ namespace Ecommerce_.Models
     {   
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
+        [Column("Id")]
         public int ContactId { get; set; }
 
         [Required (ErrorMessage = "El campo Nombres es obligatorio")]
         [StringLength(30, ErrorMessage = "El campo no puede tener mas de 30 caracteres")]
         [Column("Nombres")]
-        public string ContactName { get; set; }
+        public string Name { get; set; }
 
         [Required (ErrorMessage = "El campo Apellidos es obligatorio")]
         [StringLength(150, ErrorMessage = "El campo no puede tener mas de 150 caracteres")]
         [Column("Apellidos")]
-        public string ContactLastName { get; set; }
+        public string LastName { get; set; }
 
         [Required (ErrorMessage = " El campo Correo es requerido")]
         [EmailAddress (ErrorMessage = "El formato del correo electrónico es inválido")]
         [Column("Correo")]
-        public string ContactEmail { get; set; }
+        public string Email { get; set; }
 
         [StringLength (12, ErrorMessage = "El campo Teléfono no puede exceder los 12 caracteres")]
         [Column("Telefono")]
-        public string? ContactPhone { get; set; }
+        public string? Phone { get; set; }
 
         [Required (ErrorMessage = "El campo Mensaje es obligatorio")]
         [StringLength(300, ErrorMessage = "El campo no puede tener mas de 300 caracteres")]
         [Column("Mensaje")]
-        public string ContactMessage { get; set; }
+        public string Message { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy HH:mm}", ApplyFormatInEditMode = true)]
         [Column("Fecha")]
-        public DateTimeOffset ContactDate { get; set;} 
+        public DateTimeOffset Date { get; set;} 
 
         public Contact()
         {
-                ContactDate = DateTimeOffset.UtcNow;
+                Date = DateTimeOffset.UtcNow;
         }
     }
 }
