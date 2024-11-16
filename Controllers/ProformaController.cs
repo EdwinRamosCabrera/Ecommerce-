@@ -28,12 +28,16 @@ namespace Ecommerce_.Controllers
                 return RedirectToAction("CatalogMessage", "Catalog");
             }         
             else
-            {
-                var proformas = _context.Proformas.Where(p => p.UserId == userId).Include(p => p.Product).ToList();
-                if(proformas.Count == 0)
+            {   
+                var proformas = from o in _context.Proformas select o;
+                proformas = proformas.Include(p => p.Product).Where(p => p.UserId.Equals(userId) && p.State.Equals("PENDIENTE")).OrderBy(p => p.ProformaId);
+
+                if(proformas == null)
                 {
-                    return View();
+                    List<Proforma> proforma = new List<Proforma>();
+                    return View("Index", proforma);
                 }
+
                 return View(proformas);
             }
         }
@@ -41,9 +45,9 @@ namespace Ecommerce_.Controllers
         public IActionResult ProformaAdd(int id)
         {
             var userId = _userManager.GetUserName(User);
+
             if(userId == null)
             {
-                Console.WriteLine("No hay usuario");
                 return RedirectToAction("CatalogMessage", "Catalog");
             }
             else {
@@ -60,14 +64,33 @@ namespace Ecommerce_.Controllers
                 proforma.State = "PENDIENTE";
                 _context.Proformas.Add(proforma);
                 _context.SaveChanges();
-                Console.WriteLine("Añadido al carrito");
+
                 return RedirectToAction(nameof(Index));
             }
         }
 
-        public IActionResult ProformaMessage()
+        public IActionResult ProformaEdit(int id)
         {
-            return View();
+            var proforma = _context.Proformas.Include(p => p.Product).Where(p => p.ProformaId == id).FirstOrDefault();
+            if(proforma == null)
+            {
+                return NotFound();
+            }
+            return View(proforma);
+        }
+
+        [HttpPost]
+        public IActionResult ProformaEdit(int id, int quantity)
+        {
+            var proforma = _context.Proformas.Find(id);
+            if (proforma == null)
+            {
+                return NotFound();
+            }
+            proforma.Quantity = quantity;
+            _context.Proformas.Update(proforma);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult ProformaDelete(int id)
@@ -81,6 +104,11 @@ namespace Ecommerce_.Controllers
             _context.SaveChanges();
 
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult ProformaMessage()
+        {
+            return View();
         }
     }
 }

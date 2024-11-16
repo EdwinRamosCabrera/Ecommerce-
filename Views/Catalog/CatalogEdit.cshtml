@@ -8,7 +8,7 @@
     <h1>@ViewData["Title"]</h1>
     <div class="row">
         <div class="col-6">
-            <form method="post" asp-action="CatalogEdit">
+            <form method="post" asp-controller="Catalog" asp-action="CatalogEdit">
                 <input type="hidden" asp-for="ProductId" />
                 <input type="hidden" asp-for="CreationDate" />
                 <div class="form-group">

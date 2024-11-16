@@ -30,7 +30,7 @@ namespace Ecommerce_.Controllers
         public IActionResult PaymentCreate()
         {   
             var userId = _userManager.GetUserName(User);
-            var proforma = _context.Proformas.Where(p => p.UserId == userId).ToList();
+            var proforma = _context.Proformas.Where(p => p.UserId == userId && p.State == "PENDIENTE").ToList();
             if(proforma == null || userId == null)
             {
                 return NotFound();

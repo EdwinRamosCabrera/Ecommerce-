@@ -1,3 +1,5 @@
+@model Proforma
+
 @{
     ViewData["Title"] = "Carrito de compras";
 }
@@ -7,22 +9,20 @@
 <div class="Container">
     <div class="row">
         <div class="col-6">
-            <img src="@Model.ProductImage" alt="@Model.ProductName" style="width:100%""/>
+            <img src="@Model.Product?.Image" alt="@Model.Product.Name" style="width:100%""/>
         </div>
         <div class="col-6">
-                <h2>@Model.ProductName</h2>
-                <h3>@Model.ProductCode</h3>
-                <p>@Model.ProductDescription</p>
-                <p>S/. @Model.ProductPrice</p>
-            <form asp-controller="Catalog" asp-action="CatalogAdd">
+                <h2>@Model.Product.Name</h2>
+                <h3>@Model.Product.Code</h3>
+                <p>@Model.Product.Description</p>
+                <p>S/. @Model.Price</p>
+            <form method="post" asp-controller="Proforma" asp-action="ProformaEdit">
                 <div class="form-group">
-                    <label asp-for="ProductQuantity" class="form-control">Cantidad: </label>
-                    <input asp-for="ProductQuantity" class="form-control"/>
+                    <label for="quantity" class="form-label">Cantidad:</label>
+                    <input  type="Number" for="quantity" name="quantity" value="@Model.Quantity" class="form-control"/>
                 </div>
-                <button type="submit" class="btn btn-primary">Añadir al carrito</button>
+                <button type="submit" class="btn btn-primary">Actualizar</button>
             </form>
-
-            <a class="btn btn-primary" asp-controller="CatalogController" asp-action="CatalogAdd" asp-route-id="@Model.ProductId">Añadir al carrito</a>
         </div>
     </div>
 </div>

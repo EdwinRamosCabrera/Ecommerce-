@@ -25,10 +25,11 @@
                     <th>Subtotal</th>
                     <th>Estado</th>
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach(var item in Model)
+                @foreach(Proforma item in Model)
                 {
                     <tr>
                         <td class="text-center"><img src="@item.Product.Image" alt="@item.Product.Name" style="width: 70px"></td>
