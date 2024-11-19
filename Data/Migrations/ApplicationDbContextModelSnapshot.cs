@@ -217,6 +217,10 @@ namespace Ecommerce_.Data.Migrations
                         .HasColumnType("text")
                         .HasColumnName("Nombre_Tarjeta");
 
+                    b.Property<string>("Observations")
+                        .HasColumnType("text")
+                        .HasColumnName("Observaciones");
+
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("text")

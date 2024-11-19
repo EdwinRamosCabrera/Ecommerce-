@@ -39,7 +39,7 @@ namespace Ecommerce_.Controllers
             else {
                 _context.Contactos.Add(contact);
                 _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
         }
 
@@ -53,7 +53,7 @@ namespace Ecommerce_.Controllers
         }
 
         [HttpPost]
-        public IActionResult ContactEdit(int id, [Bind("ContactId, ContactName, ContactLastName, ContactEmail, ContactPhone, ContactMessage")] Contact updateContact)
+        public IActionResult ContactEdit(int id, [Bind("ContactId, Name, LastName, Email, Phone, Message")] Contact updateContact)
         {   
             var contactExisting = _context.Contactos.Find(id);   
             if(contactExisting == null){

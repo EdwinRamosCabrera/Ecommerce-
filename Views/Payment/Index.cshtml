@@ -23,6 +23,8 @@
                     <th>Monto Total</th>
                     <th>Observaciones</th>
                     <th></th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -33,15 +35,15 @@
                         <td>@Html.DisplayFor(modelItem => item.NameCard)</td>
                         <td>@item.DatePay.AddHours(-5).ToString("dd-MM-yyyy")</td>
                         <td>@Html.DisplayFor(modelItem => item.AmountTotal)</td>
-                        <td></td>
+                        <td>@Html.DisplayFor(modelItem => item.Observations)</td>
                         <td>
-                            <a asp-controller="Payment" asp-action="ContactEdit" asp-route-id="@item.PaymentId" class="btn btn-success">Editar</a> 
+                            <a asp-controller="Payment" asp-action="PaymentEdit" asp-route-id="@item.PaymentId" class="btn btn-success">Editar</a> 
                         </td>
                         <td>
-                            <a asp-controller="Order" asp-action="OrderList" asp-route-id="@item.PaymentId" class="btn btn-primary" >Ver Pedido</a>
+                            <a asp-controller="Order" asp-action="OrderView" asp-route-id="@item.PaymentId" class="btn btn-primary" >Ver Pedido</a>
                         </td>
                         <td>
-                            <a asp-controller="Payment" asp-action="ContactDelete" asp-route-id="@item.PaymentId" class="btn btn-danger">Eliminar</a> 
+                            <a asp-controller="Payment" asp-action="PaymentDelete" asp-route-id="@item.PaymentId" class="btn btn-danger">Eliminar</a> 
                         </td>
                     </tr>
                 }

@@ -77,7 +77,7 @@ namespace Ecommerce_.Controllers
         }
 
         [HttpPost]
-        public IActionResult CatalogEdit(int id, [Bind("ProductId", "ProductCode", "ProductName", "ProductImage", "ProductDescription", "ProductPrice", "ProductStatus", "CategoryId" )] Product product)
+        public IActionResult CatalogEdit(int id, [Bind("ProductId, Code, Name, Image, Description, Price, State, CategoryId")] Product product)
         {   
             var productExisting = _context.Productos.Find(id);
             if(productExisting == null)
@@ -126,10 +126,8 @@ namespace Ecommerce_.Controllers
             var userId = _userManager.GetUserName(User);
             if(userId == null)
             {
-                Console.WriteLine("No hay usuario");
                 return RedirectToAction(nameof(CatalogMessage));
             }
-            
                 var product = _context.Productos.Find(Id);
                 if(product == null)
                 {

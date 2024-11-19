@@ -29,7 +29,7 @@ namespace Ecommerce_.Models
 
         [Required]
         [Column("Estado")]
-        public string State { get; set; }
+        public string State { get; set; } = "PENDIENTE";
 
         [Required]
         [Column("Usuario")]
