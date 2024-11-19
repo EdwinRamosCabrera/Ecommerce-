@@ -7,7 +7,7 @@
 <div class="container">
     <h1>@ViewData["Title"]</h1>
     <a class="btn btn-primary" asp-controller="Payment" asp-action="PaymentCreate">Pagar</a>
-    @if(Model == null)
+    @if(!Model.Any() || Model == null)
     {
         <div>
             <p class="alert alert-warning">No hay productos en su carrito</p>
@@ -23,7 +23,6 @@
                     <th>Cantidad</th>
                     <th>Precio</th>
                     <th>Subtotal</th>
-                    <th>Estado</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -37,7 +36,6 @@
                         <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
                         <td>@Html.DisplayFor(modelItem => item.Price)</td>
                         <td>@item.Subtotal</td>
-                        <td>@Html.DisplayFor(modelItem => item.State)</td>
                         <td><a class="btn btn-primary" asp-action="ProformaEdit" asp-route-id="@item.ProformaId">Editar</a></td>
                         <td><a class="btn btn-danger" asp-action="ProformaDelete" asp-route-id="@item.ProformaId">Eliminar</a></td>
                     </tr>

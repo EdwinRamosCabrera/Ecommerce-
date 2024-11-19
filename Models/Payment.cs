@@ -40,5 +40,8 @@ namespace Ecommerce_.Models
         [Required]
         [Column("Monto_Total")]
         public decimal AmountTotal { get; set; }
+
+        [Column("Observaciones")]
+        public string? Observations { get; set; }
     }
 }

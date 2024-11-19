@@ -9,12 +9,12 @@
 <div class="Container">
     <div class="row">
         <div class="col-6">
-            <img src="@Model.Product?.Image" alt="@Model.Product.Name" style="width:100%""/>
+            <img src="@Model.Product?.Image" alt="@Model.Product?.Name" style="width:100%""/>
         </div>
         <div class="col-6">
-                <h2>@Model.Product.Name</h2>
-                <h3>@Model.Product.Code</h3>
-                <p>@Model.Product.Description</p>
+                <h2>@Model.Product?.Name</h2>
+                <h3>@Model.Product?.Code</h3>
+                <p>@Model.Product?.Description</p>
                 <p>S/. @Model.Price</p>
             <form method="post" asp-controller="Proforma" asp-action="ProformaEdit">
                 <div class="form-group">

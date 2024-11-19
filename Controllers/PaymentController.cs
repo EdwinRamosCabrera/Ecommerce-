@@ -23,7 +23,7 @@ namespace Ecommerce_.Controllers
 
         public IActionResult Index()
         {
-            var payment =_context.Pagos.ToList();
+            var payment =_context.Pagos.OrderBy(p => p.PaymentId).ToList();
             return View(payment);
         }
 
@@ -81,7 +81,41 @@ namespace Ecommerce_.Controllers
                 _context.SaveChanges();
             }
 
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult PaymentEdit(int id)
+        {
+            var payment =_context.Pagos.Find(id);
+            return View(payment);
+        }
+
+        [HttpPost]
+        public IActionResult PaymentEdit(int id, Payment paymentUpdate)
+        {
+            var payment =_context.Pagos.Find(id);
+            if(payment == null)
+            {
+                return NotFound();
+            }
+            payment.NameCard = paymentUpdate.NameCard;
+            payment.Observations = paymentUpdate.Observations;
+            _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult PaymentDelete(int id)
+        {
+            var payment =_context.Pagos.Find(id);
+            if(payment == null)
+            {
+                return NotFound();
+            }
+            _context.Pagos.Remove(payment);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
+
+    
 }

@@ -128,7 +128,6 @@ namespace Ecommerce_.Controllers
             {
                 return RedirectToAction(nameof(CatalogMessage));
             }
-            
                 var product = _context.Productos.Find(Id);
                 if(product == null)
                 {

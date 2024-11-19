@@ -1,0 +1,33 @@
+@model Payment
+@{
+    ViewData["Title"] = "Actualizar Pago";
+}
+<div class="container">
+    <div class="form-group row">
+        <h1 class="text-center">@ViewData["Title"]</h1>
+    </div>
+    <form method="post" asp-controller="Payment" asp-action="PaymentEdit">
+        <input type="hidden" asp-for="PaymentId" />
+        <input type="hidden" asp-for="UserId" />
+        <input type="hidden" asp-for="DatePay" />
+            <div class="form-group">
+                <label asp-for="NameCard">Nombre de la Tarjeta:</label>
+                <input asp-for="NameCard" class="form-control" autofocus />
+                <span asp-validation-for="NameCard" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Observations">Observaciones:</label>
+                <textarea asp-for="Observations" class="form-control"></textarea>
+                <span asp-validation-for="Observations" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AmountTotal">Monto Total:</label>
+                <input asp-for="AmountTotal" class="form-control" disabled/>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Actualizar Pago</button>
+            </div>
+                
+    </form>
+</div>
